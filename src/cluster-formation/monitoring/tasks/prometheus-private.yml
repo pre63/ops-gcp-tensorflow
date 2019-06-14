@@ -1,0 +1,42 @@
+---
+
+# Private Topology
+- name: Copy Prometheus values file - private
+  when: private_topology
+  copy:
+    src: files/values-prometheus.yaml
+    dest: /tmp/values-prometheus.yaml
+    mode: 0700
+    owner: admin
+    group: admin
+
+
+- name: Check to see if prometheus already exist
+  when: private_topology
+  shell: "helm ls | grep prometheus"
+  become: admin
+  register: prometheus_result
+  changed_when: prometheus_result.rc == 1
+  failed_when: prometheus_result.rc not in [0,1]
+  ignore_errors: yes
+
+- name: Install prometheus via helm
+  shell: helm install --name prometheus --namespace monitoring -f /tmp/values-prometheus.yaml stable/prometheus --version 8.11.2
+  become: admin
+  ignore_errors: yes
+  when: private_topology and prometheus_result.rc == 1
+
+- name: Upgrade prometheus via helm
+  shell: helm upgrade prometheus --namespace monitoring -f /tmp/values-prometheus.yaml stable/prometheus --version 8.11.2
+  become: admin
+  ignore_errors: yes
+  when: private_topology and prometheus_result.rc == 0
+
+
+# Cleanup
+- name: Cleanup
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - /tmp/values-prometheus.yaml

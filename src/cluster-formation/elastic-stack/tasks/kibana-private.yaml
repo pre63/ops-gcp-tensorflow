@@ -1,0 +1,41 @@
+---
+
+# Private Topology
+- name: Copy kibana values file - private
+  when: private_topology
+  copy:
+    src: files/values-kibana.yaml
+    dest: /tmp/values-kibana.yaml
+    mode: 0700
+    owner: admin
+    group: admin
+
+
+- name: Check to see if kibana already exist - private
+  when: private_topology
+  shell: "helm ls | grep kibana"
+  become: admin
+  register: kibana_result
+  changed_when: kibana_result.rc == 1
+  failed_when: kibana_result.rc not in [0,1]
+  ignore_errors: yes
+
+- name: Install kibana via helm - private
+  shell: helm install --name kibana --namespace elastic-stack -f /tmp/values-kibana.yaml stable/kibana --version 3.0.0
+  become: admin
+  ignore_errors: yes
+  when: private_topology and kibana_result.rc == 1
+
+- name: Upgrade kibana via helm - private
+  shell: helm upgrade -f /tmp/values-kibana.yaml kibana stable/kibana --version 3.0.0
+  become: admin
+  ignore_errors: yes
+  when: private_topology and kibana_result.rc == 0
+
+# Cleanup
+- name: Cleanup
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - /tmp/values-kibana.yaml

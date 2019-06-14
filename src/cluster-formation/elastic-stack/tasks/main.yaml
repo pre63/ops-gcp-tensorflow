@@ -1,0 +1,18 @@
+---
+- include: tasks/elasticsearch-private.yaml
+  when: private_topology
+
+- include: tasks/elasticsearch-public.yaml
+  when: not private_topology
+
+- include: tasks/kibana-private.yaml
+  when: private_topology
+
+- include: tasks/kibana-public.yaml
+  when: not private_topology
+
+- include: tasks/fluent-bit-private.yaml
+  when: private_topology
+
+- include: tasks/fluent-bit-public.yaml
+  when: not private_topology

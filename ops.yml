@@ -1,7 +1,7 @@
 version: "1"
-name: ops-gcp-tensorflow
-description: train and use a dataset
-run: node /ops/index.js
+name: k8s
+description: An op to run tensorflow in AWS
+run: npx ts-node src/index.ts
 network: host
 flags:
   - v=0.0.0
@@ -9,21 +9,20 @@ env:
   - USER=world
   - LOGGER_PLUGINS_STDOUT_ENABLED=true
   - OPS_ACCESS_TOKEN
-src:
-  - Dockerfile
-  - index.js
-  - demo.js
-  - package.json
-  - .dockerignore
-mountCwd: false
-mountHome: false
 bind:
   - /tmp:/tmp
+  - ~/creds:/root/creds
+  - ~/.ops/cto.ai/k8s-ops:/root/k8s-ops
+src:
+  - Dockerfile
+  - package.json
+  - .dockerignore
+  - src
+mountCwd: false
+mountHome: false
 help:
-  usage: Your first hello-world op
+  usage:
+    More documentation can be found here https://gist.github.com/nicoalimin/6b31c8940f4ac3873c63e2fd3f9dbc84
   arguments:
-    username: Your username
-    email: Your email
+    opname: The desired kubernetes command
   options:
-    build: Build flag
-    clear: Clears

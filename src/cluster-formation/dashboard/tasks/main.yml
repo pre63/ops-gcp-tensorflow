@@ -1,0 +1,68 @@
+---
+
+# Private Topology
+- name: Copy Kubernetes dashboard deployment configuration
+  when: private_topology
+  copy:
+    src: files/kubernetes-dashboard.yaml
+    dest: /tmp/kubernetes-dashboard.yaml
+    mode: 0644
+    owner: admin
+    group: admin
+
+- name: Launch Kubernetes dashboard service
+  when: private_topology
+  shell: "kubectl apply -f /tmp/kubernetes-dashboard.yaml"
+  become: admin
+  ignore_errors: yes
+
+- name: Copy Kubernetes user configuration
+  when: private_topology
+  copy:
+    src: files/kubernetes-users.yaml
+    dest: /tmp/kubernetes-users.yaml
+    mode: 0644
+    owner: admin
+    group: admin
+
+- name: Apply Kubernetes users
+  when: private_topology
+  shell: "kubectl apply -f /tmp/kubernetes-users.yaml"
+  become: admin
+  ignore_errors: yes
+  
+- name: Copy get-token script
+  when: private_topology
+  copy:
+    src: files/get-token.sh
+    dest: /usr/local/bin/get-token
+    mode: 0700
+    owner: admin
+    group: admin
+
+
+
+# Public Topology
+- name: Copy Kubernetes dashboard deployment configuration
+  when: not private_topology
+  copy:
+    src: files/kubernetes-dashboard.yaml
+    dest: /ops/manifests/kubernetes-dashboard.yaml
+    mode: 0644
+
+- name: Launch Kubernetes dashboard service
+  when: not private_topology
+  shell: "kubectl apply -f /ops/manifests/kubernetes-dashboard.yaml"
+  ignore_errors: yes
+
+- name: Copy Kubernetes user configuration
+  when: not private_topology
+  copy:
+    src: files/kubernetes-users.yaml
+    dest: /ops/manifests/kubernetes-users.yaml
+    mode: 0644
+
+- name: Apply Kubernetes users
+  when: not private_topology
+  shell: "kubectl apply -f /ops/manifests/kubernetes-users.yaml"
+  ignore_errors: yes

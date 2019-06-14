@@ -1,3 +1,9 @@
+/**
+
+  THIS FILE IS HERE ONLY AS AN EXAMPLE
+
+ */
+
 const { ux, sdk } = require('@cto.ai/sdk')
 const fuzzy = require('fuzzy')
 const states = [

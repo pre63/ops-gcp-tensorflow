@@ -1,0 +1,12 @@
+---
+- include: tasks/prometheus-private.yml
+  when: private_topology
+
+- include: tasks/prometheus-public.yml
+  when: not private_topology
+
+- include: tasks/grafana-private.yml
+  when: private_topology
+
+- include: tasks/grafana-public.yml
+  when: not private_topology

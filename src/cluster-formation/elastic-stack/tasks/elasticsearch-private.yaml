@@ -1,0 +1,40 @@
+---
+
+# Private Topology
+- name: Copy elasticsearch values file - private
+  when: private_topology
+  copy:
+    src: files/values-elasticsearch.yaml
+    dest: /tmp/values-elasticsearch.yaml
+    mode: 0700
+    owner: admin
+    group: admin
+
+- name: Check to see if elasticsearch already exist - private
+  when: private_topology
+  shell: "sudo -u admin helm ls | grep elasticsearch"
+  register: es_result
+  changed_when: es_result.rc == 1
+  failed_when: es_result.rc not in [0,1]
+  ignore_errors: yes
+
+- name: Install elasticsearch via helm - private
+  shell: helm install --name elasticsearch --namespace elastic-stack -f /tmp/values-elasticsearch.yaml stable/elasticsearch --version 1.26.2
+  become: admin
+  ignore_errors: yes
+  when: private_topology and es_result.rc == 1
+
+- name: Upgrade elasticsearch via helm - private
+  shell: helm upgrade -f /tmp/values-elasticsearch.yaml elasticsearch stable/elasticsearch --version 1.26.2
+  become: admin
+  ignore_errors: yes
+  when: private_topology and es_result.rc == 0
+
+
+# Cleanup
+- name: Cleanup
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - /tmp/values-elasticsearch.yaml
