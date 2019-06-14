@@ -14,7 +14,7 @@ env:
 bind:
   - /tmp:/tmp
   - ~/creds:/root/creds
-  - ~/.aws/credentials:/root/.aws/credentials
+  - ~/.aws/:/root/.aws/
   # - ~/.ops/cto.ai/k8s-ops:/root/k8s-ops
 src:
   - Dockerfile
