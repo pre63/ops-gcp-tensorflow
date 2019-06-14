@@ -56,8 +56,10 @@ RUN apk add --no-cache \
   && apk del build-dependencies
 
 # Added required directory
-RUN mkdir /root/creds && mkdir /ops/manifests
+RUN mkdir /root/creds && mkdir /ops/manifests && mkdir /root/.ssh && touch /root/.ssh/known_hosts
 
 # COPY --from=downloads /downloads /usr/local/bin/
 COPY --from=dep /ops .
 COPY . /ops
+
+RUN chmod 400 /ops/src/tensorflowthon.pem
