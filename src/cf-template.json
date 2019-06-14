@@ -8,7 +8,6 @@
                         "Ref": "InstanceSecurityGroup"
                     }
                 ],
-                "InstanceType" : "p2.xlarge",
                 "KeyName": "tensorflowthon",
                 "ImageId": "ami-0dfd61ae8fdc4cd9d"
             }
