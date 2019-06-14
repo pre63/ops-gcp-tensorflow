@@ -1,5 +1,5 @@
 version: "1"
-name: k8s
+name: aws-tensorflow
 description: An op to run tensorflow in AWS
 run: npx ts-node src/index.ts
 network: host
@@ -21,8 +21,8 @@ src:
 mountCwd: false
 mountHome: false
 help:
-  usage:
-    More documentation can be found here https://gist.github.com/nicoalimin/6b31c8940f4ac3873c63e2fd3f9dbc84
+  usage: Launch and train your tensorflow model on AWS.
   arguments:
-    opname: The desired kubernetes command
-  options:
+    instance: "Instance type eg: p2.xlarge"
+    input: "Your python file eg: model.py"
+
