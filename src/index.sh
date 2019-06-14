@@ -26,14 +26,15 @@ chmod 400 ./src/tensorflowthon.pem
 scp -i ./src/tensorflowthon.pem ./src/model.py ubuntu@$PUBLIC_IP:/home/ubuntu
 
 # Appened these before any commands you want to run in the instance
-ssh -i ./src/tensorflowthon.pem ubuntu@$PUBLIC_IP "sudo apt-get install software-properties-common && \
+ssh -i ./src/tensorflowthon.pem ubuntu@$PUBLIC_IP "sudo apt-get install software-properties-common -y && \
 sudo add-apt-repository ppa:deadsnakes/ppa -y && \
 sudo apt-get update -y && \
 sudo apt-get install python3.6 -y && \
 sudo apt install python-pip -y && \
 sudo pip install --upgrade pip && \
-sudo pip install --ignore-installed tensorflow==2.0.0-beta1 && \
-python3 model.py"
+sudo pip install --ignore-installed tensorflow==2.0.0-beta1" >/dev/null
+
+ssh -i ./src/tensorflowthon.pem ubuntu@$PUBLIC_IP "python model.py"
 
 # Run cloud formation delete stack
 aws cloudformation delete-stack --stack-name $UUID
