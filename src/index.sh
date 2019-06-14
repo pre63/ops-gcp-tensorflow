@@ -19,6 +19,10 @@ aws ec2 wait instance-status-ok --instance-ids $RESOURCE_ID
 # Gets the Public IP
 PUBLIC_IP=$(aws ec2 describe-instances --instance-ids $RESOURCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
 
+ssh-keyscan -H $PUBLIC_IP >> /.ssh/known_hosts
+
+chmod 400 ./src/tensorflowthon.pem
+
 # Appened these before any commands you want to run in the instance
 ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "sudo apt-get install software-properties-common"
 ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "sudo add-apt-repository ppa:deadsnakes/ppa"
