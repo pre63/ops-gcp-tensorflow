@@ -7,6 +7,7 @@ aws sts get-caller-identity
 cat src/model.py
 
 # Run CloudFormation
+aws cloudformation create-stack --stack-name tf-stack --template-body file://cf-template.json
 
 # Run SSH commands to:
 # - send model.py to server.
