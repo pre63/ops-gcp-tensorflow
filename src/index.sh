@@ -33,7 +33,7 @@ ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "sudo pip install --upgrade 
 ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "pip install --ignore-installed tensorflow==2.0.0-beta0"
 
 # Run the model and log the output
-python model.py
+ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "python model.py"
 
 # Run cloud formation delete stack
 
