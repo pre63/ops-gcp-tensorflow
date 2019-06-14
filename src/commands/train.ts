@@ -1,10 +1,13 @@
 import { ux } from '@cto.ai/sdk'
 
+import AWS from 'aws-sdk';
+
 // import * as util from 'util'
-// import * as fs from 'fs-extra'
+import * as fs from 'fs-extra'
 // import * as childProcess from 'child_process'
 // import * as yaml from 'yaml'
-// import { awsSetup } from '../utils/aws'
+import { awsSetup } from '../utils/aws'
+import { readConfig } from '../utils/config'
 // import {
 //   asyncPipe,
 //   writeToFileSync,
@@ -508,6 +511,25 @@ import { ux } from '@cto.ai/sdk'
 export const train = async (file) => {
 
   console.log('TRAINING:', file)
+
+  awsSetup()
+
+  const configs = await readConfig()
+
+  console.log('configs:', configs)
+
+  // var cloudformation = new AWS.CloudFormation();
+  // cloudformation.createStack(params, function(err, data) {
+  //   if (err) console.log(err, err.stack); // an error occurred
+  //   else     console.log(data);           // successful response
+  // });
+
+  // var cloudformation = new AWS.CloudFormation();
+  // cloudformation.cancelUpdateStack(params, function (err, data) {
+  //   if (err) console.log(err, err.stack); // an error occurred
+  //   else     console.log(data);           // successful response
+  // });
+
 
   // try {
   //   const createPipeline = asyncPipe(
