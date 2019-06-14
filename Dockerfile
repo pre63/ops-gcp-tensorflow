@@ -1,7 +1,7 @@
 ############################
 # Download container
 ############################
-FROM alpine:3.6 as downloads
+# FROM alpine:3.6 as downloads
 
 # WORKDIR /downloads
 
