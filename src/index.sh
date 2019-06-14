@@ -7,7 +7,7 @@ aws sts get-caller-identity
 cat src/model.py
 
 # Run CloudFormation
-# Prachi
+aws cloudformation create-stack --stack-name tf-stack --template-body file://cf-template.json
 
 # Run SSH commands to:
 #
