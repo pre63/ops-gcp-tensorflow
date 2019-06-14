@@ -41,6 +41,7 @@ ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "pip install --ignore-instal
 # - Report back with results.
 
 # Run cloud formation delete stack
+aws cloudformation delete-stack --stack-name $UUID
 
 # ops aws-tensorflow report
 
