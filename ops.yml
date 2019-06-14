@@ -1,7 +1,8 @@
 version: "1"
 name: aws-tensorflow
 description: An op to run tensorflow in AWS
-run: npx ts-node src/index.ts
+# run: ls /cwd
+run: npx ts-node /cwd/src/index.ts
 network: host
 flags:
   - v=0.0.0
@@ -12,13 +13,13 @@ env:
 bind:
   - /tmp:/tmp
   - ~/creds:/root/creds
-  - ~/.ops/cto.ai/k8s-ops:/root/k8s-ops
+  # - ~/.ops/cto.ai/k8s-ops:/root/k8s-ops
 src:
   - Dockerfile
   - package.json
   - .dockerignore
   - src
-mountCwd: false
+mountCwd: true
 mountHome: false
 help:
   usage: Launch and train your tensorflow model on AWS.
