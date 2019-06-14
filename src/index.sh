@@ -28,17 +28,11 @@ ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "sudo apt install python-pip
 ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "sudo pip install --upgrade pip"
 ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "pip install --ignore-installed tensorflow==2.0.0-beta0"
 
-
-
-# Run SSH commands to:
-#
-# - Send model.py to server.
-# - Run model.py.
-# - Report back with results.
+# Run the model and log the output
+python model.py
 
 # Run cloud formation delete stack
 
-# ops aws-tensorflow report
 
 
 
