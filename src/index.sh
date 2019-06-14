@@ -24,7 +24,7 @@ ssh-keyscan -H $PUBLIC_IP >> ~/.ssh/known_hosts
 chmod 400 ./src/tensorflowthon.pem
 
 # Appened these before any commands you want to run in the instance
-ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "sudo apt-get install software-properties-common \
+ssh -i ./src/tensorflowthon.pem ubuntu@$PUBLIC_IP "sudo apt-get install software-properties-common \
 sudo add-apt-repository ppa:deadsnakes/ppa \
 sudo apt-get update \
 sudo apt-get install -y python3.6 \
@@ -33,7 +33,7 @@ sudo pip install --upgrade pip \
 pip install --ignore-installed tensorflow==2.0.0-beta0"
 
 # Run the model and log the output
-ssh -i ./src/tensorflowthon.pem ec2-user@$PUBLIC_IP "python model.py"
+ssh -i ./src/tensorflowthon.pem ubuntu@$PUBLIC_IP "python model.py"
 
 # Run cloud formation delete stack
 aws cloudformation delete-stack --stack-name $UUID
