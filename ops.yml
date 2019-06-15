@@ -16,6 +16,5 @@ mountHome: false
 help:
   usage: Launch and train your tensorflow model on AWS.
   arguments:
-    instance: "Instance type eg: p2.xlarge"
-    input: "Your python file eg: model.py"
+    command: One of create or destroy
 
