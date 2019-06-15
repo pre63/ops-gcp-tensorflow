@@ -11,7 +11,8 @@ async function main() {
       shell.exec(`./src/scripts/create.sh ${UUID}`) // still using shell to pipe stdout
       break;
     case 'destroy':
-      shell.exec(`./src/scripts/destroy.sh ${UUID}`) // still using shell to pipe stdout
+      const desiredUUID = argv._[0]
+      shell.exec(`./src/scripts/destroy.sh ${desiredUUID}`) // still using shell to pipe stdout
       break;
     default:
       break;
