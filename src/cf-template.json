@@ -10,7 +10,7 @@
                 ],
                 "InstanceType" : "t2.small",
                 "KeyName": "tensorflow",
-                "ImageId": "ami-8f8105f0"
+                "ImageId": "ami-68a75915"
             }
         },
         "InstanceSecurityGroup": {
