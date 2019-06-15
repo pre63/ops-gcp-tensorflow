@@ -9,7 +9,7 @@
                     }
                 ],
                 "InstanceType" : "t2.small",
-                "KeyName": "tensorflowthon",
+                "KeyName": "tensorflow",
                 "ImageId": "ami-098248b463b9233c6"
             }
         },

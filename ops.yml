@@ -1,28 +1,15 @@
 version: "1"
 name: aws-tensorflow
 description: An op to run tensorflow in AWS
-# run: ls src
-# run: npx ts-node src/index.ts
 run: npx node src/index.js
-# run: ./src/index.sh
 network: host
-flags:
-  - v=0.0.0
-env:
-  - USER=world
-  - LOGGER_PLUGINS_STDOUT_ENABLED=true
-  - OPS_ACCESS_TOKEN
 bind:
-  - /tmp:/tmp
-  - ~/creds:/root/creds
   - ~/.aws/:/root/.aws/
-  # - ~/.ops/cto.ai/k8s-ops:/root/k8s-ops
 src:
   - Dockerfile
   - package.json
   - .dockerignore
   - src
-  # - index.sh
 mountCwd: false
 mountHome: false
 help:
