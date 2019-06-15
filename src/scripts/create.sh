@@ -10,7 +10,7 @@ echo "Waiting for stack to be created, hang on!"
 aws cloudformation wait stack-create-complete --stack-name $UUID
 
 # Gets the resource ID
-RESOURCE_ID=$(aws cloudformation describe-stack-resource --stack-name $UUID --logical-resource-id HelloBucket | jq ".StackResourceDetail.PhysicalResourceId" | sed 's/^"\(.*\)"$/\1/')
+RESOURCE_ID=$(aws cloudformation describe-stack-resource --stack-name $UUID --logical-resource-id TensorflowInstance | jq ".StackResourceDetail.PhysicalResourceId" | sed 's/^"\(.*\)"$/\1/')
 
 echo "Waiting for the instance to finish initializing"
 

@@ -1,6 +1,6 @@
 {
     "Resources" : {
-        "HelloBucket" : {
+        "TensorflowInstance" : {
             "Type" : "AWS::EC2::Instance",
             "Properties": {
                 "SecurityGroups": [
