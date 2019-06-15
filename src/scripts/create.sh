@@ -33,7 +33,7 @@ echo "Installing the python environment on the instance..."
 ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y && \
 sudo yum install python36 -y && \
 curl -O https://bootstrap.pypa.io/get-pip.py && \
-python3 get-pip.py -—user && \
+python get-pip.py -—user && \
 sudo pip install --upgrade pip && \
 sudo pip install --ignore-installed tensorflow==2.0.0-beta1" >/dev/null
 
