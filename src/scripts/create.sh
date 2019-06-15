@@ -30,12 +30,28 @@ chmod 400 /root/creds/tensorflow.pem
 echo "Installing the python environment on the instance..."
 
 # # Appened these before any commands you want to run in the instance
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y && \
-sudo yum install python36 -y && \
-curl -O https://bootstrap.pypa.io/get-pip.py && \
-python get-pip.py --user && \
-sudo pip install --upgrade pip && \
-sudo pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y" >/dev/null
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum install python36 -y" >/dev/null
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "curl -O https://bootstrap.pypa.io/get-pip.py" >/dev/null
+
+
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python get-pip.py --user" >/dev/null
+RC=$?
+if [ "$RC" != "0" ]; then
+  ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo python get-pip.py --user" >/dev/null
+fi
+
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "pip install --upgrade pip" >/dev/null
+RC=$?
+if [ "$RC" != "0" ]; then
+  ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo pip install --upgrade pip" >/dev/null
+fi
+
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
+RC=$?
+if [ "$RC" != "0" ]; then
+  ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
+fi
 
 echo "Running your python tensorflow code..."
 
