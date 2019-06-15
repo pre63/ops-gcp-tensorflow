@@ -8,10 +8,10 @@ async function main() {
 
   switch(argv._[0]) {
     case 'create':
-      await sdk.exec(`./src/scripts/create.sh ${UUID}`)
+      shell.exec(`./src/scripts/create.sh ${UUID}`) // still using shell to pipe stdout
       break;
     case 'destroy':
-      await sdk.exec(`./src/scripts/destroy.sh ${UUID}`)
+      shell.exec(`./src/scripts/destroy.sh ${UUID}`) // still using shell to pipe stdout
       break;
     default:
       break;
