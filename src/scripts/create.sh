@@ -2,17 +2,19 @@
 
 UUID=$1
 
+echo "Started creating the cloudformation stack, hang on..."
+
 # Run CloudFormation
 aws cloudformation create-stack --stack-name $UUID --template-body file://src/cf-template.json >/dev/null
 
-echo "Waiting for stack to be created, hang on!"
+echo "Starting to initialize instances..."
 
 aws cloudformation wait stack-create-complete --stack-name $UUID
 
 # Gets the resource ID
 RESOURCE_ID=$(aws cloudformation describe-stack-resource --stack-name $UUID --logical-resource-id TensorflowInstance | jq ".StackResourceDetail.PhysicalResourceId" | sed 's/^"\(.*\)"$/\1/')
 
-echo "Waiting for the instance to finish initializing"
+echo "Waiting for the instance to finish initializing..."
 
 aws ec2 wait instance-status-ok --instance-ids $RESOURCE_ID
 
