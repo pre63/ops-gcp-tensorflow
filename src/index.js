@@ -11,7 +11,12 @@ async function main() {
       shell.exec(`./src/scripts/create.sh ${UUID}`) // still using shell to pipe stdout
       break;
     case 'destroy':
-      const desiredUUID = argv._[0]
+      if (!argv._ || argv._.length < 2) {
+        console.log('Please specify a stack name to delete');
+        process.exit(1)
+      }
+      const desiredUUID = argv._[1]
+
       shell.exec(`./src/scripts/destroy.sh ${desiredUUID}`) // still using shell to pipe stdout
       break;
     default:
