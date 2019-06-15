@@ -24,7 +24,7 @@ PUBLIC_IP=$(aws ec2 describe-instances --instance-ids $RESOURCE_ID --query 'Rese
 echo "The following output adds the instance to the known hosts"
 ssh-keyscan -H $PUBLIC_IP >> ~/.ssh/known_hosts
 
-# Allows the pem key to be executed
+# Allows the pem key to be read only by the user
 chmod 400 /root/creds/tensorflow.pem
 
 echo "Installing the python environment on the instance..."
@@ -33,9 +33,9 @@ echo "Installing the python environment on the instance..."
 ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y && \
 sudo yum install python36 -y && \
 curl -O https://bootstrap.pypa.io/get-pip.py && \
-python get-pip.py -—user && \
-sudo pip install --upgrade pip && \
-sudo pip install --ignore-installed tensorflow==2.0.0-beta1" >/dev/null
+python get-pip.py --user && \
+pip install --upgrade pip && \
+pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
 
 echo "Running your python tensorflow code..."
 
