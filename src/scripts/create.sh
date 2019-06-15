@@ -34,8 +34,8 @@ ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y && \
 sudo yum install python36 -y && \
 curl -O https://bootstrap.pypa.io/get-pip.py && \
 python get-pip.py --user && \
-pip install --upgrade pip && \
-pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
+sudo pip install --upgrade pip && \
+sudo pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
 
 echo "Running your python tensorflow code..."
 
