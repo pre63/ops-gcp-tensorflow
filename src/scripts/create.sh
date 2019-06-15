@@ -62,3 +62,4 @@ scp -i /root/creds/tensorflow.pem ./src/model.py ec2-user@$PUBLIC_IP:/home/ec2-u
 ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python model.py"
 
 echo "Sucessfully created the instance with name $UUID"
+echo "You can SSH into the instance by executing the following `ssh -i ~/creds/tensorflow.pem ec2-user@$PUBLIC_IP`"
