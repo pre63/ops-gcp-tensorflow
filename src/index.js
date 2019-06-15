@@ -4,11 +4,15 @@ const shell = require('shelljs')
 async function main() {
   const argv = sdk.yargs.argv
 
+  const { stdout: UUID } = await sdk.exec('echo $(tensorflow-$(uuidgen))')
+  console.log('UUID :', UUID)
+
   switch(argv._[0]) {
     case 'create':
-      shell.exec('./src/index.sh');
+      await sdk.exec(`./src/scripts/index.sh ${UUID}`)
       break;
     case 'destroy':
+      await sdk.exec(`./src/scripts/destroy.sh ${UUID}`)
       break;
     default:
       break;

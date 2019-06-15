@@ -5,6 +5,7 @@ run: npx node src/index.js
 network: host
 bind:
   - ~/.aws/:/root/.aws/
+  - ~/creds/:/root/creds
 src:
   - Dockerfile
   - package.json
