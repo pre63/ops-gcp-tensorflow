@@ -49,17 +49,17 @@ RUN apk add --no-cache \
       openssl-dev \
   && pip install --upgrade \
     awscli \
-    ansible==2.7.8 \
     boto \
     boto3 \
     botocore \
   && apk del build-dependencies
 
 # Added required directory
-RUN mkdir /root/creds && mkdir /ops/manifests && mkdir /root/.ssh && touch /root/.ssh/known_hosts
+RUN mkdir /root/creds && \
+ mkdir /ops/manifests && \
+ mkdir /root/.ssh && \
+ touch /root/.ssh/known_hosts
 
 # COPY --from=downloads /downloads /usr/local/bin/
 COPY --from=dep /ops .
 COPY . /ops
-
-RUN chmod 400 /ops/src/tensorflowthon.pem

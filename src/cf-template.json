@@ -1,6 +1,6 @@
 {
     "Resources" : {
-        "HelloBucket" : {
+        "TensorflowInstance" : {
             "Type" : "AWS::EC2::Instance",
             "Properties": {
                 "SecurityGroups": [
@@ -9,8 +9,8 @@
                     }
                 ],
                 "InstanceType" : "t2.small",
-                "KeyName": "tensorflowthon",
-                "ImageId": "ami-098248b463b9233c6"
+                "KeyName": "tensorflow",
+                "ImageId": "ami-68a75915"
             }
         },
         "InstanceSecurityGroup": {

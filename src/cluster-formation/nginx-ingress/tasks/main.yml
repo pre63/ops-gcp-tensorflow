@@ -1,6 +1,0 @@
----
-- include: tasks/nginx-ingress-private.yml
-  when: private_topology
-
-- include: tasks/nginx-ingress-public.yml
-  when: not private_topology

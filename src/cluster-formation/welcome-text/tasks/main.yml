@@ -1,3 +1,0 @@
----
-- name: Set SSH login message
-  copy: src=motd.txt dest=/etc/motd owner=root group=root mode=0644
