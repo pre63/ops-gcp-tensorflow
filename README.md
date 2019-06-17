@@ -12,7 +12,7 @@ Please have the following ready:
 
 ## Commands
 
-### Create:
+### Create
 
 - Create will start an EC2 instance using cloudformation, and runs your `model.py`
 - Resources created through this method will output a `stack name` at the very last. Keep this if you want to delete the instance later on
