@@ -1,7 +1,7 @@
 {
-  "name": "k8s",
+  "name": "tensorflow-op",
   "version": "1.0.0",
-  "description": "An op to setup a new kubernetes cluster",
+  "description": "An op to deploy and run TensorFlow 2.0-beta1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

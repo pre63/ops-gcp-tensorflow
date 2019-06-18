@@ -8,13 +8,13 @@ Please have the following ready:
 - Set your region to be `us-east1` (Not yet tested for other regions)
 - An ec2 KeyPair named `tensorflow` that exists in your AWS account and region
 - A `tensorflow.pem` located in your ~/creds/tensorflow.pem that has access to the ec2 instance's Key Pair in AWS
-- `model.py` in your `src` folder, containing the pyton code you want to run on Tensorflow, if you haven't already
+- `tensorflow-op.py` in your `src` folder, containing the pyton code you want to run on Tensorflow, if you haven't already
 
 ## Commands
 
 ### Create
 
-- Create will start an EC2 instance using cloudformation, and runs your `model.py`
+- Create will start an EC2 instance using cloudformation, and runs your `tensorflow-op.py`
 - Resources created through this method will output a `stack name` at the very last. Keep this if you want to delete the instance later on
 - Arguments: None
 - Flags:

@@ -55,11 +55,11 @@ fi
 
 echo "Running your python tensorflow code..."
 
-# Transfers the model.py file to the container
-scp -i /root/creds/tensorflow.pem ./src/model.py ec2-user@$PUBLIC_IP:/home/ec2-user
+# Transfers the tensorflow-op.py file to the container
+scp -i /root/creds/tensorflow.pem ./src/tensorflow-op.py ec2-user@$PUBLIC_IP:/home/ec2-user
 # Runs the newly-transferred file using python3 and tensorflow2.0
 # TODO: Confirm whether this is using tensorflow2.0
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python model.py"
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python tensorflow-op.py"
 
 echo "Sucessfully created the instance with name $UUID"
 echo "You can SSH into the instance by executing the following `ssh -i ~/creds/tensorflow.pem ec2-user@$PUBLIC_IP`"

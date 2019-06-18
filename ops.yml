@@ -1,5 +1,5 @@
 version: "1"
-name: aws-tensorflow
+name: tensorflow-op
 description: An op to run tensorflow in AWS
 run: npx node src/index.js
 network: host
