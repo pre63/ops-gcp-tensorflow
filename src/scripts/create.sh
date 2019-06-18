@@ -27,39 +27,40 @@ ssh-keyscan -H $PUBLIC_IP >> ~/.ssh/known_hosts
 # Allows the pem key to be read only by the user
 chmod 400 /root/creds/tensorflow.pem
 
-echo "Installing the python environment on the instance..."
+# echo "Installing the python environment on the instance..."
 
-# # Appened these before any commands you want to run in the instance
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y" >/dev/null
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum install python36 -y" >/dev/null
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "curl -O https://bootstrap.pypa.io/get-pip.py" >/dev/null
+# # # Appened these before any commands you want to run in the instance
+# ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum update -y" >/dev/null
+# ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo yum install python36 -y" >/dev/null
+# ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "curl -O https://bootstrap.pypa.io/get-pip.py" >/dev/null
 
 
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python get-pip.py --user" >/dev/null
-RC=$?
-if [ "$RC" != "0" ]; then
-  ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo python get-pip.py --user" >/dev/null
-fi
+# ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python get-pip.py --user" >/dev/null
+# RC=$?
+# if [ "$RC" != "0" ]; then
+#   ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo python get-pip.py --user" >/dev/null
+# fi
 
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "pip install --upgrade pip" >/dev/null
-RC=$?
-if [ "$RC" != "0" ]; then
-  ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo pip install --upgrade pip" >/dev/null
-fi
+# ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "pip install --upgrade pip" >/dev/null
+# RC=$?
+# if [ "$RC" != "0" ]; then
+#   ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo pip install --upgrade pip" >/dev/null
+# fi
 
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
-RC=$?
-if [ "$RC" != "0" ]; then
-  ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
-fi
+# ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
+# RC=$?
+# if [ "$RC" != "0" ]; then
+#   ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "sudo pip install --ignore-installed tensorflow==2.0.0-beta1 --user" >/dev/null
+# fi
 
 echo "Running your python tensorflow code..."
 
-# Transfers the tensorflow-op.py file to the container
-scp -i /root/creds/tensorflow.pem ./src/tensorflow-op.py ec2-user@$PUBLIC_IP:/home/ec2-user
+# Transfers the tensorflow.py file to the container
+scp -i /root/creds/tensorflow.pem ./src/tensorflow.py ec2-user@$PUBLIC_IP:/home/ec2-user
+
 # Runs the newly-transferred file using python3 and tensorflow2.0
 # TODO: Confirm whether this is using tensorflow2.0
-ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python tensorflow-op.py"
+ssh -i /root/creds/tensorflow.pem ec2-user@$PUBLIC_IP "python tensorflow.py"
 
 echo "Sucessfully created the instance with name $UUID"
 echo "You can SSH into the instance by executing the following `ssh -i ~/creds/tensorflow.pem ec2-user@$PUBLIC_IP`"
