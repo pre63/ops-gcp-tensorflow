@@ -15,7 +15,7 @@
     "@types/fs-extra": "7.0.0",
     "@types/node": "^12.0.2",
     "@types/yaml": "^1.0.2",
-    "aws-sdk": "^2.476.0",
+    "aws-sdk": "^2.814.0",
     "fuzzy": "^0.1.3",
     "shelljs": "^0.8.3",
     "ts-node": "^8.1.0",
